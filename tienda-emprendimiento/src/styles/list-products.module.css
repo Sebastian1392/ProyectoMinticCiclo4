@@ -1,0 +1,31 @@
+:root{
+    --fuente-principal: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.allList{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    font-family: var(--fuente-principal);
+}
+
+.product {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    padding: 0;
+}
+
+h3{
+    margin: 0%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+}

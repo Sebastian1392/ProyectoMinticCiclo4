@@ -1,0 +1,22 @@
+:root{
+    --fuente-principal: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.nav{
+    background-color: gray;
+    padding: 0px;
+    margin: 0px;
+    color: white;
+    font-family: var(--fuente-principal);
+}
+
+.ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 3rem;
+    list-style-type: none;
+    padding: 10px;
+}
