@@ -1,11 +1,16 @@
-import {Nav} from './components/nav.js';
-import { ListProducts } from './components/list-products.js';
+import React from 'react';
+import {NavAdmin, NavClients, ListProducts, CarProducts } from './components';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export const App = () => {
-    return(
-        <>
-            <Nav />
-            <ListProducts />
-        </>
-    );
-};
+    return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<NavClients />}>
+          <Route path="products" element={<ListProducts />} />
+          <Route path="car" element={<CarProducts />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}

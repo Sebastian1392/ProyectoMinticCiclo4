@@ -1,0 +1,32 @@
+:root {
+    --fuente-principal: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+}
+
+table,th,td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-family: var(--fuente-principal);
+    text-align: center;
+}
+
+.total{
+    border: none;
+    border-collapse: none;
+}
+
+.buttonsDiv{
+    margin-top: 10px;
+    display: flex;
+}
+
+button{
+    font-family: var(--fuente-principal);
+    font-size: 15px;
+    margin: 0px 10px;
+}
+
+img{
+    width: 100px;
+}

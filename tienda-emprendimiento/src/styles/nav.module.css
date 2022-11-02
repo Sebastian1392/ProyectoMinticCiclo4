@@ -20,3 +20,14 @@
     list-style-type: none;
     padding: 10px;
 }
+
+.profile{
+    position: relative;
+    width: auto;
+    left: 95%;
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+}
