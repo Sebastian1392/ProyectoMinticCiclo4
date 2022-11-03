@@ -5,26 +5,21 @@
 }
 
 .nav{
-    border: 1px solid blue;
-    background-color: transparent;
+    border-bottom: 1px solid black;
     padding: 0px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    color: white;
+    margin: 0px;
     font-family: var(--fuente-principal);
-    width: 70%;
-    margin-left: 15%;
-    margin-right: 15%;
 }
 
 .ul{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 3rem;
     list-style-type: none;
-    margin: 5px;
-    padding: 0;
+    padding: 10px;
+    margin-bottom: 0;
+    padding-bottom: 2px;
 }
 
 .profile{
@@ -36,8 +31,9 @@
 .link{
     text-decoration: none;
     color: black;
+    font-size: 20px;
 }
 
 .link:hover{
-    font-size: 20px;
+    border-bottom: 3px solid blue;
 }

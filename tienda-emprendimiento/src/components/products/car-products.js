@@ -31,8 +31,8 @@ export const CarProducts = () => {
                 <tr>
                     <td className={styles.total}></td>
                     <td className={styles.total}></td>
-                    <td className={styles.total}><b>Total</b></td>
                     <td className={styles.total}></td>
+                    <td className={styles.total}><b>Total</b></td>
                     <td className={styles.total}><b>$ 150</b></td>
                 </tr>
             </table>
