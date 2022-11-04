@@ -8,7 +8,7 @@ export const NavRol = () => {
             <nav className={styles.nav}>
                 <ul className={styles.ul}>
                     <li><Link className={styles.link} to="admin-rol">Perfil Admin</Link ></li>
-                    <li><Link className={styles.link} to="client-rol">Perfil cliente</Link ></li>
+                    <li><Link className={styles.link} to="client-rol">Perfil Cliente</Link ></li>
                 </ul>
             </nav>
             <Outlet />
