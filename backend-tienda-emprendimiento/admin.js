@@ -8,7 +8,7 @@ const Product = require('./product');
 
 const app = express(); //se crea una instancia de la aplicación express
 const port = 3000; // se configura el puerto
-const url = "mongodb+srv://theencodingteam:theencodingteam@clusterproductos.rzruckt.mongodb.net/tiendaEmprendimiento?retryWrites=true&w=majority";
+const url = "mongodb+srv://theencodingteam:theencodingteam@clusterproductos.rzruckt.mongodb.net/tiendaEmprendimiento";
 
 app.use(express.json());
 
@@ -30,7 +30,7 @@ app.get('/productos/admin', async (req, res) => {
 
 app.post('/producto/admin', async (req, res) => {
     const product = req.body;
-    console.log(product);
+    console.log("info:",product);
     try {
         const productDB = new Product(product);
         await productDB.save();
