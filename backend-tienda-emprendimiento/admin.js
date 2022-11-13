@@ -1,7 +1,3 @@
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
-// const path = require('path');
-// const dataBase = require('./data');
 const express = require('express'); //se importa el marco de trabajo
 const mongoose = require('mongoose')
 const Product = require('./product');
@@ -18,7 +14,6 @@ mongoose.connect(url)
 
 
 app.get('/productos/admin', async (req, res) => {
-    // const productList = await Product.find({stock: {$gt : 0}});
     const productList = await Product.find();
     console.log(productList);
     try {

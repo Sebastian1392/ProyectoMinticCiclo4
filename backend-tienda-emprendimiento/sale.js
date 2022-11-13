@@ -10,7 +10,8 @@ const saleSchema = new Schema({
         }
     ],    
     totalProducts: Number,
-    totalPrice: Number
+    totalPrice: Number,
+    saleDate: String
 });
 
 const Sale = mongoose.model("ventas", saleSchema);
