@@ -30,12 +30,23 @@ app.get('/productos/client', async (req, res) => {
     }
 });
 
-app.get('/agregar-producto/client/', async (req, res) => {
+app.post('/agregar-producto/client/', async (req, res) => {
     const clientRequest = req.body
+    let existInList = false;
     try {
         const product = await Product.findOne({ _id: clientRequest.id });
-        carProducts.push({ product: product, quantity:clientRequest.quantity});
-        res.send(carProducts);
+        for (let i = 0; i < carProducts.length; i++) {
+            let obj = carProducts[i];
+            if (obj.idProduct == clientRequest.id) {
+                obj.quantity += clientRequest.quantity
+                existInList = true;
+                break;
+            }
+        }
+        if (!existInList) {
+            carProducts.push({ idProduct: product._id,price:product.price, quantity:clientRequest.quantity});
+        }
+        res.send({ products: carProducts });
     } catch (error) {
         console.log("error", error)
     }
@@ -44,19 +55,19 @@ app.get('/agregar-producto/client/', async (req, res) => {
 /*
 Datos para probar POST en postman:
 {
-    "product":[
+    "products":[
         {
-            "_id": "636ef768360f4b5dad1c9c57",
+            "idProduct": "636ef768360f4b5dad1c9c57",
             "price": 45.96,
             "quantity": 2
         },
                 {
-            "_id": "636f34fbbef9cdb69656a430",
+            "idProduct": "636f34fbbef9cdb69656a430",
             "price": 45.96,
             "quantity": 2
         },
                 {
-            "_id": "636f36e2390e0647bcfbafd5",
+            "idProduct": "636f36e2390e0647bcfbafd5",
             "price": 45.96,
             "quantity": 2
         }
@@ -64,8 +75,8 @@ Datos para probar POST en postman:
 }
 */
 
-app.post('/agregar-venta', async(req, res) => {
-    let products = req.body.product;
+app.post('/agregar-venta/client/', async(req, res) => {
+    let products = req.body.products;
     let totalProducts = 0;
     let totalPrice = 0;
 
@@ -85,4 +96,4 @@ app.post('/agregar-venta', async(req, res) => {
         .catch((err) => res.json(err));
 });
 
-app.listen(port,()=>console.log(`App Libro está en el puerto ${port}!`));
+app.listen(port,()=>console.log(`App tienda emprendimiento clientes está en el puerto ${port}!`));
