@@ -1,35 +1,63 @@
-import React from "react";
-import "../../styles/Sale.css"
-
-const ventas = [
-    {
-        id: 2310,
-        fecha: "2022/11/01",
-        valor: 10000
-    },
-    {
-        id: 4222,
-        fecha: "2022/11/02",
-        valor: 15000
-    },
-    {
-        id: 3543,
-        fecha: "2022/11/03",
-        valor: 23000
-    },
-    {
-        id: 4532,
-        fecha: "2022/11/04",
-        valor: 41000
-    },
-    {
-        id: 5739,
-        fecha: "2022/10/05",
-        valor: 13000
-    },
-]
+import React, {useState, useEffect} from "react";
+import Styles from "../../styles/Sale.css"
 
 export const Sale=()=> {
+    const [sales, setSales] = useState(false);
+
+    useEffect(() => {
+        fetch('http://localhost:3002/ventas')
+            .then((res) => {return res.json()})
+            .then((res) => {setSales(res)});
+    }, []);
+
+    if(!sales){
+        return (
+            <div>
+                <h1>Cargando...</h1>
+            </div>
+        )
+    }else{
+        return (
+            <section>
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Productos</th>
+                        <th>Total Productos</th>
+                        <th>Precio Total</th>
+                        <th>Fecha de Venta</th>
+                    </tr>
+                    {
+                        sales.map(({_id, products, totalProducts, totalPrice, saleDate}) => {
+                            return (
+                                <tr>
+                                    <th>{_id}</th>
+                                    <th>
+                                        <select>
+                                            {
+                                                products.map(({_id}) => {
+                                                    return (
+                                                        <option disabled>{_id}</option>
+                                                    )
+                                                })
+                                            }
+                                        </select>
+                                    </th>
+                                    <th>{totalProducts}</th>
+                                    <th>{totalPrice}</th>
+                                    <th>{saleDate}</th>
+                                </tr>
+                            )
+                        })
+                    }              
+                </table>
+            </section>
+
+
+        )
+    }
+
+    /*
     const [total, setTotal] = React.useState(0);
     React.useEffect( () => {
         let counter = 0;
@@ -66,5 +94,6 @@ export const Sale=()=> {
             </section>
         </>
     );
+    */
 }
 

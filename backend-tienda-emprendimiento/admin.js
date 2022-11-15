@@ -1,12 +1,19 @@
 const express = require('express'); //se importa el marco de trabajo
 const mongoose = require('mongoose')
 const Product = require('./product');
+const cors = require("cors");
+const Sale = require("./sale");
 
 const app = express(); //se crea una instancia de la aplicación express
-const port = 3000; // se configura el puerto
+const port = 3002; // se configura el puerto
 const url = "mongodb+srv://theencodingteam:theencodingteam@clusterproductos.rzruckt.mongodb.net/tiendaEmprendimiento";
 
 app.use(express.json());
+app.use(
+	cors({
+		origin: "*",
+	})
+);
 
 mongoose.connect(url)
     .then(()=>console.log("conectado a mongodb"))
@@ -74,6 +81,16 @@ app.post('/producto-stock/:id', async (req, res) => {
     try {
         await Product.findByIdAndUpdate(id, {stock:(stockQuantity + actualStock.stock)}, { useFindAndModify: false });
         res.send('Se actualizó el stock del producto correctamente correctamente');
+    } catch (error) {
+        console.log("error", error)
+    }
+});
+
+app.get('/ventas', async (req, res) => {
+    const sales = await Sale.find();
+    console.log(sales);
+    try {
+        res.send(sales);
     } catch (error) {
         console.log("error", error)
     }

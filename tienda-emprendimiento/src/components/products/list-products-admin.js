@@ -1,41 +1,46 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styles from '../../styles/list-products-admin.module.css';
 import sol from "../../img/sol.png"
-import corazon from "../../img/corazon.png"
 
 export const ListProductsAdmin = () => {
-    return(
-        <div className={styles.allList}>
-            <div className={styles.product}>
-                <img alt="sol" src={sol}/>
-                <h3>Sol de espuma</h3>
-                <p>$50.0</p>
-                <p>Stock: 15</p>
+    const [products, setProducts] = useState(false);
+
+    useEffect(() => {
+        fetch('http://localhost:3002/productos/admin')
+        .then((response) => {
+            return response.json();
+        })
+        .then(
+            (response) => {
+                setProducts(response);
+            }
+        );
+    },[]);
+
+    if(!products) {
+        console.log(products);
+        return(
+            <div className={styles.allList}>
+                Cargando...
             </div>
-            <div className={styles.product}>
-                <img alt="sol" src={corazon}/>
-                <h3>Corazon de juguete</h3>
-                <p>$35.0</p>
-                <p>Stock: 3</p>
+        );
+    } else {
+        return(
+            <div className={styles.allList}>
+                {
+                    products.map( ({_id,name,price,stock}) => {
+                        return (
+                            <div key={_id} className={styles.product}>
+                                <img alt="sol" src={sol}/>
+                                <h3>{name}</h3>
+                                <p>${price}</p>
+                                <p>{stock}</p>
+                            </div>
+                        )
+                    })
+                }
             </div>
-            <div className={styles.product}>
-                <img alt="sol" src={sol}/>
-                <h3>Corazon de juguete</h3>
-                <p>$35.0</p>
-                <p>Stock: 3</p>
-            </div>
-            <div className={styles.product}>
-                <img alt="sol" src={corazon}/>
-                <h3>Corazon de juguete</h3>
-                <p>$35.0</p>
-                <p>Stock: 3</p>
-            </div>
-            <div className={styles.product}>
-                <img alt="sol" src={sol}/>
-                <h3>Corazon de juguete</h3>
-                <p>$35.0</p>
-                <p>Stock: 3</p>
-            </div>
-        </div>
-    );
+        );
+    }
+
 };

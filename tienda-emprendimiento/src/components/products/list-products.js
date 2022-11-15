@@ -17,6 +17,7 @@ export const ListProducts = () => {
         );
     },[]);
 
+
     const onAddToCart = (id) => {
         const body = JSON.stringify({id});
         fetch('http://localhost:3001/agregar-producto/client/',
