@@ -21,31 +21,19 @@ export const Sale=()=> {
             <section>
                 <table>
                     <tr>
-                        <th>Id</th>
-                        <th>Productos</th>
-                        <th>Total Productos</th>
-                        <th>Precio Total</th>
                         <th>Fecha de Venta</th>
+                        <th>Id</th>
+                        <th>Precio Total</th>
+                        
                     </tr>
                     {
                         sales.map(({_id, products, totalProducts, totalPrice, saleDate}) => {
                             return (
                                 <tr>
-                                    <th>{_id}</th>
-                                    <th>
-                                        <select>
-                                            {
-                                                products.map(({_id}) => {
-                                                    return (
-                                                        <option disabled>{_id}</option>
-                                                    )
-                                                })
-                                            }
-                                        </select>
-                                    </th>
-                                    <th>{totalProducts}</th>
-                                    <th>{totalPrice}</th>
                                     <th>{saleDate}</th>
+                                    <th>{_id}</th>
+                                    <th>{totalPrice}</th>
+                                   
                                 </tr>
                             )
                         })

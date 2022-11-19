@@ -47,6 +47,26 @@ table tr:nth-child( 2n + 1 ) {
     border-bottom: 1px solid green;
 }
 
+input{
+    width: 100%;
+}
+
+textarea{
+    max-width: 100%;
+}
+
+.buttonSave{
+    font-family: var(--fuente-principal);
+    padding: 0.5rem;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
 @media (width < 768px) {
     .img{
         width: 100px;
