@@ -34,7 +34,7 @@ app.get('/productos/client', async (req, res) => {
 	}
 });
 
-app.get('/producto/client/:id', async (req, res) => {
+app.get('/productos/client/:id', async (req, res) => {
 	try {
         const product = await Product.findById(req.params.id);
 		res.send(product);
@@ -42,6 +42,28 @@ app.get('/producto/client/:id', async (req, res) => {
 		console.log("error: ", error);
 	}
 });
+
+// Parte modificación del producto // PUT
+app.put('/productos/client/:id', async( req, res ) => {
+
+    const { id } = req.params;
+    const body = req.body;
+
+    try {
+        // Validar la existencia del producto en BD
+        const existsProduct = await Product.findById( id );
+        if ( !existsProduct ) {
+            return res.status(404).json({ok: false, msg: "El producto no existe."});
+        }
+
+        await Product.findByIdAndUpdate(id, body);
+        return res.json({ok:true, msg: "¡Producto actualizado con éxito!"});
+
+    } catch (error) {
+        return res.status(500).json({ok:false,msg:"Hubo un error inesperado."})
+    }
+})
+// //
 
 app.get('/carrito/client', (req, res) => {
 	res.send(cartProducts);
