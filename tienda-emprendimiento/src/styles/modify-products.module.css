@@ -8,11 +8,18 @@ table tr:nth-child( 2n + 1 ) {
     background-color: lightgray;
 }
 
+.newProductContainer{
+    display: grid;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+}
+
 .container{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin: 2rem;
     font-family: var(--fuente-principal);
+    height: 100%;
 }
 
 .listmenu{
@@ -23,6 +30,7 @@ table tr:nth-child( 2n + 1 ) {
     border-radius: 1%;
     gap: 7px;
     background-color: #eeeeee;
+    height: fit-content;
 }
 
 .fig{
@@ -58,6 +66,7 @@ textarea{
 .buttonSave{
     font-family: var(--fuente-principal);
     padding: 0.5rem;
+    width: 100%;
 }
 
 .buttonContainer{
