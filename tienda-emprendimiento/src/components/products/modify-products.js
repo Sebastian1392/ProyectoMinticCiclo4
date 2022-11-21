@@ -5,12 +5,16 @@ import corazon from "../../img/corazon.png"
 
 export const ModifyProduct = () => { 
     const [products, setProducts] = useState(false);
+    const [create, setCreate] = useState(false);
+
     const [name, setName] = useState(''); 
     const [description, setDescription] = useState(''); 
+    const [imgUrl, setImgUrl] = useState('');
+
     const [price, setPrice] = useState(0); 
     const [stock, setStock] = useState(0); 
     const [idP, setIdP] = useState(0);
-    const [create, setCreate] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,39 +27,31 @@ export const ModifyProduct = () => {
     const updateProduct = async () => {
         let result = await fetch(`http://localhost:3002/producto/admin/${idP}`, {
             method:'PUT',
-            body: JSON.stringify({name, description, price, stock}),
+            body: JSON.stringify({name, description, price, stock, imgUrl}),
             headers: {
                 'Content-Type':'Application/json'
             }
         });
         if(result){
             alert(`El producto "${name}" fue modificado exitosamente!`);
-            setName('');
-            setDescription('');
-            setStock('');
-            setPrice('');
-            setIdP('');
+            window.location.reload(false);
         }else{
             console.warn(`El producto "${name}" no fue modificado...`);
         }
     }
 
     const createProduct = async () => {
-        console.warn(JSON.stringify({name, description, price, stock}));
+        console.warn(JSON.stringify({name, description, price, stock, imgUrl}));
         let result = await fetch(`http://localhost:3002/producto/admin`, {
             method:'POST',
-            body: JSON.stringify({name, description, price, stock}),
+            body: JSON.stringify({name, description, price, stock, imgUrl}),
             headers: {
                 'Content-Type':'Application/json'
             }
         });
         if(result){
             alert(`El producto "${name}" fue creado exitosamente!`);
-            setName('');
-            setDescription('');
-            setStock('');
-            setPrice('');
-            setIdP('');
+            window.location.reload(false);
         }else{
             console.warn(`El producto "${name}" no fue creado...`);
         }
@@ -72,6 +68,7 @@ export const ModifyProduct = () => {
         setDescription('');
         setPrice('');
         setStock('');
+        setImgUrl('');
         setCreate(true);
     }
 
@@ -87,6 +84,7 @@ export const ModifyProduct = () => {
                 setDescription(res.description);
                 setStock(res.stock);
                 setPrice(res.price);
+                setImgUrl(res.imgUrl);
             });
     }
 
@@ -116,8 +114,12 @@ export const ModifyProduct = () => {
 
                 <div className={styles.fig}>
                     {(() => {
-                        if(name){
-                            <img className={styles.img} alt="sol" src={corazon}/>
+                        if(idP){
+                            return (
+                                <>
+                                    <img className={styles.img} alt="Ingrese un Link para cargar la imagen" src={imgUrl}/>
+                                </>     
+                            )
                         }
                     })()}
                     
@@ -132,25 +134,31 @@ export const ModifyProduct = () => {
                                             <tr>                 
                                                 <td>Nombre:</td>
                                                 <td>
-                                                    <input onChange={(e) => {setName(e.target.value)}} name="idProduct" value={name}></input>
+                                                    <input onChange={(e) => {setName(e.target.value)}} value={name}></input>
                                                 </td>
                                             </tr>   
                                             <tr>
                                                 <td>Descripción:</td>
                                                 <td>
-                                                    <textarea onChange={(e) => {setDescription(e.target.value)}} name="descriptionProduct" value={description}></textarea>
+                                                    <textarea onChange={(e) => {setDescription(e.target.value)}} value={description}></textarea>
                                                 </td>
                                             </tr>   
                                             <tr>
                                                 <td>Precio:</td>
                                                 <td>
-                                                    <input onChange={(e) => {setPrice(e.target.value)}} name="priceProduct" value={price}></input>
+                                                    <input onChange={(e) => {setPrice(e.target.value)}} value={price}></input>
                                                 </td>
                                             </tr>   
                                             <tr>
                                                 <td>Stock:</td>
                                                 <td>
-                                                    <input onChange={(e) => {setStock(e.target.value)}} name="stockProduct" value={stock}></input>
+                                                    <input onChange={(e) => {setStock(e.target.value)}} value={stock}></input>
+                                                </td>
+                                            </tr>   
+                                            <tr>
+                                                <td>Link de imagen:</td>
+                                                <td>
+                                                    <input onChange={(e) => {setImgUrl(e.target.value)}} value={imgUrl}></input>
                                                 </td>
                                             </tr>   
                                         </table>

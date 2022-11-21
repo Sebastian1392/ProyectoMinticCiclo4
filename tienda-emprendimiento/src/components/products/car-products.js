@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/car-products.module.css";
-import sol from "../../img/sol.png";
-import corazon from "../../img/corazon.png";
 
 export const CarProducts = () => {
 	const [cart, setCart] = useState(false);
 
     const getProduct = async (id, quantity) => {
-        const response = await fetch(`http://localhost:3001/producto/client/${id}`);
-        const { name, price } = await response.json();
+        const response = await fetch(`http://localhost:3001/productos/client/${id}`);
+        const { name, price , imgUrl} = await response.json();
+		console.warn("hola");
         return {
             id,
-            image: "",
+            imgUrl,
             name,
             price,
             quantity,
@@ -40,8 +39,9 @@ export const CarProducts = () => {
 	useEffect(() => {
 		getCart()
 	}, []);
+
 	if (!cart) {
-		return <>cargando...</>;
+		return <>Cargando...</>;
 	} else {
 		return (
 			<>
@@ -57,11 +57,11 @@ export const CarProducts = () => {
 					</thead>
 					<tbody>
 						{cart.map(
-							({ id, image, quantity, name, price, total }) => {
+							({ id, imgUrl, quantity, name, price, total }) => {
 								return (
 									<tr key={id}>
 										<td>
-											<img src={image} />
+											<img src={imgUrl} />
 										</td>
 										<td>{quantity}</td>
 										<td>{name}</td>

@@ -22,7 +22,6 @@ mongoose.connect(url)
 
 app.get('/productos/admin', async (req, res) => {
     const productList = await Product.find();
-    console.log(productList);
     try {
         res.send(productList);
     } catch (error) {
@@ -32,7 +31,6 @@ app.get('/productos/admin', async (req, res) => {
 
 app.post('/producto/admin', async (req, res) => {
     const product = req.body;
-    console.log("info:",product);
     try {
         const productDB = new Product(product);
         await productDB.save();
@@ -77,7 +75,6 @@ app.post('/producto-stock/:id', async (req, res) => {
     const id = req.params.id
     const stockQuantity = req.body.quantity;
     const actualStock = await Product.findOne({_id:id});
-    console.log(actualStock);
     try {
         await Product.findByIdAndUpdate(id, {stock:(stockQuantity + actualStock.stock)}, { useFindAndModify: false });
         res.send('Se actualizó el stock del producto correctamente correctamente');
@@ -88,7 +85,6 @@ app.post('/producto-stock/:id', async (req, res) => {
 
 app.get('/ventas', async (req, res) => {
     const sales = await Sale.find();
-    console.log(sales);
     try {
         res.send(sales);
     } catch (error) {

@@ -28,10 +28,10 @@ export const ListProductsAdmin = () => {
         return(
             <div className={styles.allList}>
                 {
-                    products.map( ({_id,name,price,stock}) => {
+                    products.map( ({_id,name,price,stock, imgUrl}) => {
                         return (
                             <div key={_id} className={styles.product}>
-                                <img alt="sol" src={sol}/>
+                                <img alt="sol" src={imgUrl}/>
                                 <h3>{name}</h3>
                                 <p>${price}</p>
                                 <p>{stock}</p>
